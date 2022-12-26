@@ -1,0 +1,4 @@
+OS info is 
+uname_result(system='Windows', node='S760', release='7', version='6.1.7601', machine='AMD64', processor='Intel64 Family 6 Model 37 Stepping 2, GenuineIntel')
+
+Python version is 3.8.10 (tags/v3.8.10:3d8993a, May  3 2021, 11:48:03) [MSC v.1928 64 bit (AMD64)] ('64bit', 'WindowsPE')
