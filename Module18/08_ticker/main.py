@@ -1,14 +1,10 @@
 def shift_compare(list_1, list_2):
-    index = list_2.index(list_1[0],)
-#    print('index', index)
-    for _ in range(len(list_2)-index):
+    for i in range(len(list_2)):
         tail = list_2[len(list_2)-1]
-#        print('tail', tail)
         list_2.pop(len(list_2)-1)
         list_2.insert(0, tail)
-#        print('list_2', list_2)
-    if list_1 == list_2:
-        return index
+        if list_1 == list_2:
+          return i+1
 
 
 first = list(input('Первая строка: '))  # qwerty
