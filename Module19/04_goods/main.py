@@ -24,4 +24,13 @@ store = {
     ],
 }
 
-# TODO здесь писать код
+quant = 0
+summ = 0
+for key, value in goods.items():
+    if value in store:
+        for index in range(len(store[value])):
+            quant += int(store[value][index]['quantity'])
+            summ += int(store[value][index]['quantity']*store[value][index]['price'])
+        print(f'{key} \t- {quant} шт., \tстоимость {summ} руб.')
+        quant = 0
+        summ = 0
