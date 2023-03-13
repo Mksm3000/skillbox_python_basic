@@ -7,13 +7,13 @@
 # ('b', 20)
 # ('c', 30)
 # ('d', 40)
-
-def my_zip(str,kort):
-    answer = []
-    for i in range(min(len(str),len(kort))):
-        block = (str[i], kort[i])
-        answer.append(block)
-    return answer
+#
+# def my_zip(str, kort):
+#     answer = []
+#     for i in range(min(len(str), len(kort))):
+#         block = (str[i], kort[i])
+#         answer.append(block)
+#     return answer
 
 
 import random
@@ -33,6 +33,9 @@ for _ in range(kortezh_length):
 kortezh = tuple(kortezh)
 print(f'Кортеж: {kortezh}')
 
-print(f'\nРезультат:')
-for pair in my_zip(stroka, kortezh):
+my_gen = ((stroka[i], kortezh[i]) for i in range(min(len(stroka), len(kortezh))))
+
+print('\n', my_gen)
+print('Результат:')
+for pair in my_gen:
     print(pair)

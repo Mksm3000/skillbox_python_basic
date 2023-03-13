@@ -2,7 +2,8 @@
 def tpl_sort(tpl):
     tpl = list(tpl)
     for num in tpl:
-        if not float(num).is_integer():
+        num_type = type(num)
+        if num_type != 'int':
             tpl = tuple(tpl)
             return tpl
     tpl.sort()
@@ -12,8 +13,8 @@ def tpl_sort(tpl):
 
 import random
 
-original_list = [random.randint(-10, 10) for _ in range(7)]
-# original_list = [5, -7.5, -5, -9, -10, 4, 1]
+# original_list = [random.randint(-10, 10) for _ in range(7)]
+original_list = [5, -7.5, -5, -9, -10, 4, 1]
 original_tuple = tuple(original_list)
 
 # print(f'Оригинальный список: {original_list}')
