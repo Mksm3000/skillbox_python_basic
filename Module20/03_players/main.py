@@ -4,4 +4,8 @@ players = {
     ("Rob", "Bobbin"): (12, 8, 2)
 }
 
-# TODO здесь писать код
+remix = list()
+for index, value in players.items():
+    stamp = index + value
+    remix.append(stamp)
+print(remix)
