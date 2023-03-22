@@ -29,7 +29,7 @@ site = {
 
 time = int(input('\nСколько сайтов: '))
 result_total = dict()
-zamena = ('телефон',)
+zamena = ('телефон', 'iPhone')
 
 while time:
     result = copy.deepcopy(site)

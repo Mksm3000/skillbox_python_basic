@@ -2,10 +2,10 @@ def find(struct, key, depth):
     if key in struct:
         return struct[key]
 
-    while depth >= 1:
+    while depth > 1:
         for sub_struct in struct.values():
             if isinstance(sub_struct, dict):
-                result = find(sub_struct, key, depth)
+                result = find(sub_struct, key, depth-1)
                 if result:
                     break
         else:
