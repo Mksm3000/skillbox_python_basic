@@ -29,28 +29,24 @@
 # Ольга ysbxur@gmail.com 20
 
 def valid(data):
-    error_str = str()
-    try:
-        if len(data) != 3:
-            raise IndexError
-        elif not data[0].isalpha():
-            raise NameError
-        elif '@' not in data[1] or '.' not in data[1]:
-            raise SyntaxError
-        elif int(data[2]) < 10 or int(data[2]) > 99:
-            raise ValueError
-    except IndexError as index_err:
-        error_str += 'НЕ присутствуют все три поля. '
-    except NameError as name_err:
-        error_str += 'Поле «Имя» содержит НЕ только буквы. '
-    except SyntaxError as syn_err:
-        error_str += 'Поле «Имейл» НЕ содержит @ и . (точку). '
-    except ValueError as val_err:
-        error_str += 'Поле «Возраст» НЕ является числом от 10 до 99. '
+    if len(data) != 3:
+        return IndexError
+    elif not data[0].isalpha():
+        return NameError
+    elif '@' not in data[1] or '.' not in data[1]:
+        return SyntaxError
+    elif int(data[2]) < 10 or int(data[2]) > 99:
+        return ValueError
+    # except IndexError as index_err:
+    #     error_str += 'НЕ присутствуют все три поля. '
+    # except NameError as name_err:
+    #     error_str += 'Поле «Имя» содержит НЕ только буквы. '
+    # except SyntaxError as syn_err:
+    #     error_str += 'Поле «Имейл» НЕ содержит @ и . (точку). '
+    # except ValueError as val_err:
+    #     error_str += 'Поле «Возраст» НЕ является числом от 10 до 99. '
     else:
         return 'None'
-
-    return error_str
 
 
 file = open('registrations_bad.log', 'w')
@@ -64,9 +60,18 @@ with open('registrations.txt', 'r', encoding='utf-8') as file_reg:
         line = line.rstrip('\n')
         line_list = line.split()
         result = valid(line_list)
-        if result != 'None':
+        if result == IndexError:
             with open('registrations_bad.log', 'a', encoding='utf-8') as file_bad:
-                file_bad.write(line + '\t' + result + '\n')
-        else:
+                file_bad.write(line + '\t' + 'НЕ присутствуют все три поля.' + str(result) + '\n')
+        elif result == NameError:
+            with open('registrations_bad.log', 'a', encoding='utf-8') as file_bad:
+                file_bad.write(line + '\t' + 'Поле «Имя» содержит НЕ только буквы.' + str(result) + '\n')
+        elif result == SyntaxError:
+            with open('registrations_bad.log', 'a', encoding='utf-8') as file_bad:
+                file_bad.write(line + '\t' + 'Поле «Имейл» НЕ содержит @ и . (точку).' + str(result) + '\n')
+        elif result == ValueError:
+            with open('registrations_bad.log', 'a', encoding='utf-8') as file_bad:
+                file_bad.write(line + '\t' + 'Поле «Возраст» НЕ является числом от 10 до 99.' + str(result) + '\n')
+        elif result == 'None':
             with open('registrations_good.log', 'a', encoding='utf-8') as file_good:
                 file_good.write(line + '\n')
