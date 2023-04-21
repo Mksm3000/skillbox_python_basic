@@ -1,39 +1,102 @@
 import random
 
-magic_dict = {
-    'Шторм': ['Вода', 'Воздух'],
-    'Пар': ['Вода', 'Огонь'],
-    'Грязь': ['Вода', 'Земля'],
-    'Молния': ['Огонь', 'Воздух'],
-    'Пыль': ['Земля', 'Воздух'],
-    'Лава': ['Огонь', 'Земля'],
-}
 
-
-class Basic:
-
-    def __init__(self, name):
-        self.name = name
+class Water:
+    def __str__(self):
+        return 'Water'
 
     def __add__(self, other):
-        for key, value in magic_dict.items():
-            if self.name in value and other.name in value and self.name != other.name:
-                return key
-        else:
-            return None
+        if isinstance(other, Air):
+            return Storm()
+        elif isinstance(other, Fire):
+            return Vape()
+        elif isinstance(other, Earth):
+            return Mud()
 
 
-class Magic:
+class Air:
+    def __str__(self):
+        return 'Air'
 
-    def __init__(self, answer):
-        self.answer = answer
+    def __add__(self, other):
+        if isinstance(other, Fire):
+            return Lite()
+        elif isinstance(other, Earth):
+            return Dust()
+        elif isinstance(other, Water):
+            return Storm()
 
 
-random_1 = (random.choice(list(magic_dict.values())))[0]
-random_2 = (random.choice(list(magic_dict.values())))[1]
+class Fire:
+    def __str__(self):
+        return 'Fire'
 
-element_1 = Basic(random_1)
-element_2 = Basic(random_2)
+    def __add__(self, other):
+        if isinstance(other, Earth):
+            return Lava()
+        elif isinstance(other, Air):
+            return Lite()
+        elif isinstance(other, Water):
+            return Vape()
 
-magic_element = Magic(element_1 + element_2)
-print(f'\nСложили "{element_1.name}" + "{element_2.name}" и получили "{magic_element.answer}"')
+
+class Earth:
+    def __str__(self):
+        return 'Earth'
+
+    def __add__(self, other):
+        if isinstance(other, Water):
+            return Mud()
+        elif isinstance(other, Air):
+            return Lite()
+        elif isinstance(other, Fire):
+            return Lava()
+
+
+class Storm:
+    def __str__(self):
+        return 'Storm'
+
+
+class Vape:
+    def __str__(self):
+        return 'Vape'
+
+
+class Mud:
+    def __str__(self):
+        return 'Mud'
+
+
+class Lite:
+    def __str__(self):
+        return 'Lite'
+
+
+class Dust:
+    def __str__(self):
+        return 'Dust'
+
+
+class Lava:
+    def __str__(self):
+        return 'Lava'
+
+
+water = Water()
+air = Air()
+storm = Storm()
+fire = Fire()
+vape = Vape()
+earth = Earth()
+mud = Mud()
+lite = Lite()
+dust = Dust()
+lava = Lava()
+
+while True:
+    r1 = random.choice([water, air, fire, earth])
+    r2 = random.choice([water, air, fire, earth])
+    print(f'\n{r1} + {r2}', end=' = ')
+    print(r1 + r2)
+    void = input('push any key!\n')

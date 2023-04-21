@@ -2,44 +2,37 @@ import random
 
 
 class Student:
-    surname = ''
-    name = ''
-    group = ''
-    marks = []
+
+    def __init__(self, surname, name, group, marks):
+        self.surname = surname
+        self.name = name
+        self.group = group
+        self.marks = marks
 
     def info(self):
         print(f'ФИ: {self.surname} {self.name}. '
               f'Группа: {self.group}. Успеваемость: {self.marks}. '
-              f'Средний балл: {self.mark_mid(self.marks)}')
+              f'Средний балл: {self.mark_mid()}')
 
-    def mark_mid(self, marks):
+    def mark_mid(self):
         return sum(self.marks) / len(self.marks)
-
-
-def sort_srednee(i):
-    # print(i)
-    # print(i[3])
-    srednee = sum(i[3]) / len(i[3])
-    # print(srednee)
-    return srednee
 
 
 surname = ['Petrov', 'Ivanov', 'Smirnov', 'Sidorov', 'Chekhov', 'Bulgakov', 'Mishin', 'Osipov', 'Klimov']
 name = ['Boris', 'Vova', 'Gena', 'Dima', 'Egor', 'Maksim', 'Petya', 'Denis', 'Pasha', 'Sergey']
 
-student_list = [Student() for _ in range(10)]
-sort_list = []
-for i_element in student_list:
-    i_element.surname = random.choice(surname)
-    i_element.name = random.choice(name)
-    i_element.group = random.randint(1, 5)
-    i_element.marks = [random.randint(3, 10) for _ in range(5)]
-    data = [i_element.surname, i_element.name, 'Группа №' + str(i_element.group), i_element.marks]
-    sort_list.append(data)
-    #i_element.info()
+student_list = []
 
-# print(sort_list)
-sort_list.sort(key=sort_srednee)
+for _ in range(10):
+    student = Student(
+        surname = random.choice(surname),
+        name = random.choice(name),
+        group = random.randint(1, 5),
+        marks = [random.randint(3, 10) for _ in range(5)]
+    )
+    student_list.append(student)
 
-for element in sort_list:
-    print(*element)
+student_list.sort(key=Student.mark_mid)
+
+for student in student_list:
+    student.info()
