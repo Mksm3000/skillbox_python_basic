@@ -77,7 +77,15 @@ class Healer(Hero):
     # - магическая сила - равна значению НАЧАЛЬНОГО показателя силы умноженному на 3 (self.__power * 3)
     def __init__(self, name):
         super().__init__(name)
-        self.__power = self.start_power * 3
+        self.__magic = self.start_power * 3
+
+    def get_magic(self):
+        """ Получение уровня урона """
+        return self.__magic
+
+    def set_magic(self, new_magic):
+        """ Настройка уровня урона """
+        self.__magic = new_magic
 
     # Методы:
     # - атака - может атаковать врага, но атакует только в половину силы self.__power
@@ -94,7 +102,7 @@ class Healer(Hero):
         super().take_damage(power)
 
     def healing(self, target):
-        target.set_hp(target.get_hp() + self.get_power())
+        target.set_hp(target.get_hp() + self.get_magic())
 
     def make_a_move(self, friends, enemies):
         print(self.name, end=' ')
