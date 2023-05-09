@@ -9,10 +9,11 @@ def one_year_of_war():
 
     tank = Tank("Танк Пётр")
     attacker = Attacker("Убийца Ольга")
-    second_attacker = Attacker("Убийца Траур")
     healer = Healer("Монах Игнат")
     second_healer = Healer("Монах Ирэна")
-    good_team = [tank, attacker, second_attacker, second_healer, healer]
+    third_healer = Healer("Монах Пэркси")
+
+    good_team = [tank, attacker, healer, second_healer, third_healer]
 
     # Код ниже изменять нельзя!
 
@@ -26,28 +27,32 @@ def one_year_of_war():
         print("В команде героев может быть только 1 монстр!")
         return 0
 
-    evil_names = ["Абвыргл", "Мефисто", "Драник", "Диабло", "Пусечка", "Стаут"]
+    evil_names = ["Ужас", "Дьявол", "Гнев", "Сатана", "Страх", "Смерть"]
     mob_warrior = MonsterBerserk("Берсерк " + random.choice(evil_names))
-    mob_ranger = MonsterHunter("Рейнджер " + random.choice(evil_names))
+    mob_ranger = MonsterHunter("Некромант " + random.choice(evil_names))
+
     evil_team = [mob_warrior, mob_ranger]
 
     for day in range(1, 366):
         print("=" * 50 + "\nНачало дня №" + str(day) + "\n" + "=" * 50)
 
         # В циклах у героев и монстров вызывается метод make_a_move, который должен выбирать и совершать одно действие
-        # Для наглядности вы можете добавлять в каждое действие принты с подробностями (чтобы знать кто когда и что совершает)
-        # При помощи этой информации вы сможете искать проблемы и ошибки в вашем коде и в конечном итоге это поможет вам улучшить стратегию
-        print("\nКоманда добра:\n" + '-' * 50)
+        # Для наглядности вы можете добавлять в каждое действие принты с подробностями
+        # (чтобы знать кто когда и что совершает)
+        # При помощи этой информации вы сможете искать проблемы и ошибки в вашем коде
+        # и в конечном итоге это поможет вам улучшить стратегию
+        print("\nКоманда добра делает ход:\n" + '-' * 50)
         for hero in good_team:
             hero.make_a_move(good_team, evil_team)
 
-        print("\nКоманда зла:\n" + '-' * 50)
+        print("\nКоманда зла делает ход:\n" + '-' * 50)
         for mob in evil_team:
             mob.make_a_move(evil_team, good_team)
 
         print(f"Итоги дня сражений №{day}")
 
-        # В итогах дня у каждого героя и каждого монстра вызывается метод __str__ который должен описывать их текущее состояние
+        # В итогах дня у каждого героя и каждого монстра вызывается метод __str__
+        # который должен описывать их текущее состояние
         print("\nКоманда добра:\n" + '-' * 50)
         for hero in good_team:
             print(hero)
@@ -64,13 +69,13 @@ def one_year_of_war():
             evil_team.append(random.choice(newborn_evils))
 
         if any([not hero.is_alive() for hero in good_team]):
-            print("Вы проиграли!")
+            print("\nВы проиграли!")
             return 0
         else:
-            print("Сражение продолжается!")
+            print("\nСражение продолжается!")
 
     else:
-        print("Вы одержали победу!")
+        print("\nВы одержали победу!")
         return 1
 
 

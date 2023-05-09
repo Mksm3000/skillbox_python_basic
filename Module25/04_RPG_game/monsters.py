@@ -2,35 +2,44 @@ import random
 
 
 class Monster:
+    """ Класс Монстр """
     max_hp = 150
     start_power = 10
 
     def __init__(self, name):
+        """ Имя монстра """
         self.name = name
         self.__hp = self.max_hp
         self.__power = self.start_power
         self.__is_alive = True
 
     def get_hp(self):
+        """ Получение очков здоровья """
         return self.__hp
 
     def set_hp(self, new_value):
+        """ Настройка очков здоровья """
         self.__hp = max(new_value, 0)
 
     def get_power(self):
+        """ Получение уровня урона """
         return self.__power
 
     def set_power(self, new_power):
+        """ Настройка уровня урона """
         self.__power = new_power
 
     def attack(self, target):
+        """ Нанесение урона выбранной цели """
         pass
 
     def is_alive(self):
+        """ Статус жизни """
         return self.__is_alive
 
     def take_damage(self, damage):
-        print("\t", self.name, "Получил удар с силой равной = ", round(damage), ". Осталось здоровья - ", round(self.get_hp()))
+        """ Получение удара, осталось здоровья """
+        print("\t", self.name, "получил удар с силой равной = ", round(damage), ". Осталось здоровья - ", round(self.get_hp()))
         if self.get_hp() <= 0:
             self.__is_alive = False
 
@@ -38,7 +47,7 @@ class Monster:
         pass
 
     def __str__(self):
-        return 'Name: {0} | HP: {1}'.format(self.name, self.get_hp())
+        return 'Name: {0} | HP: {1}'.format(self.name, round(self.get_hp(),2))
 
 
 class MonsterBerserk(Monster):
@@ -63,7 +72,7 @@ class MonsterBerserk(Monster):
         if not enemies:
             return
         if self.madness < 3:
-            print("Атакую того, кто стоит ближе -", enemies[0].name)
+            print(">> атакует ближнего >>", enemies[0].name)
             self.attack(enemies[0])
         else:
             target = random.choice(enemies)
@@ -102,11 +111,11 @@ class MonsterHunter(Monster):
                 min_health = target_of_potion.get_hp()
 
         if min_health < 60 and self.potions > 0:
-            print("Исцеляю", target_of_potion.name)
+            print("исцеляет", target_of_potion.name)
             self.give_a_potion(target_of_potion)
         else:
             if not enemies:
                 return
-            print("Атакую ближнего -", enemies[0].name)
+            print(">> атакует ближнего >>", enemies[0].name)
             self.attack(enemies[0])
         print('\n')
