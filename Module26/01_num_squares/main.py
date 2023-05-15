@@ -1,15 +1,17 @@
+from collections.abc import Iterable, Iterator
+
 
 # класс-итератор
 class Iterator:
 
-    def __init__(self, num):
+    def __init__(self, num: int) -> None:
         self.start = 0
         self.num = num
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[int]:
         return self
 
-    def __next__(self):
+    def __next__(self) -> int:
         if self.start < self.num:
             self.start += 1
             return self.start ** 2
@@ -18,7 +20,7 @@ class Iterator:
 
 
 # функция-генератор
-def generator(num):
+def generator(num: int) -> Iterable[int]:
     for i in range(1, num + 1):
         yield i ** 2
 

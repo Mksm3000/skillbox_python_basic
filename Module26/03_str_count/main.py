@@ -1,7 +1,8 @@
 import os
+from collections.abc import Iterable
 
 
-def counter():
+def counter() -> Iterable[str]:
     os.chdir('..')
     my_path = os.getcwd()
     print(f'\nПерешли (на 1 уровень выше) в родительскую директорию: {my_path}\n')
@@ -9,8 +10,8 @@ def counter():
     for root, dirs, files in os.walk(my_path):
         for name in files:
             if name.endswith('.py'):
-                print(f'\n{root}\\{name}')
-                with open(root+'\\'+name, encoding='utf8') as data:
+                print(f'\n{root}{os.sep}{name}')
+                with open(root + os.sep + name, encoding='utf8') as data:
                     count = 0
                     for line in data:
                         line = line.rstrip('\n')

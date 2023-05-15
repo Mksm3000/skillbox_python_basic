@@ -1,20 +1,20 @@
+from collections.abc import Iterable, Iterator
+
+
 class LinkedList:
     """ Связный список """
     head = None
 
     class Node:
         """ Узел """
-        element = None
-        next_node = None
+        element: int = None
+        next_node: int = None
 
-        def __init__(self, element, next_node=None):
+        def __init__(self, element: int, next_node=None) -> None:
             self.element = element
             self.next_node = next_node
 
-        def __str__(self):
-            return self
-
-    def append(self, element):
+    def append(self, element) -> int:
         if not self.head:
             self.head = self.Node(element)
             return element
@@ -25,7 +25,7 @@ class LinkedList:
 
         node.next_node = self.Node(element)
 
-    def get(self, index):
+    def get(self, index: int) -> int:
         i = 0
         node = self.head
         prev_node = None
@@ -37,7 +37,7 @@ class LinkedList:
 
         return node.element
 
-    def remove(self, index):
+    def remove(self, index: int) -> int:
         if index == 0:
             self.head = self.head.next_node
 
@@ -56,7 +56,7 @@ class LinkedList:
         del node
         return element
 
-    def __str__(self):
+    def __str__(self) -> str:
         node = self.head
         temp = []
         while node.next_node:
@@ -64,6 +64,7 @@ class LinkedList:
             node = node.next_node
         temp.append(node.element)
         return str(temp)
+
 
 
 my_list = LinkedList()
@@ -75,3 +76,5 @@ print('Получение третьего элемента:', my_list.get(2))
 print('Удаление второго элемента.')
 my_list.remove(1)
 print('Новый список:', my_list)
+
+

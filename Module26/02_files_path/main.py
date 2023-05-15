@@ -3,19 +3,20 @@
 # генерирует пути всех встреченных файлов.
 
 import os
-
-my_path = os.path.abspath(os.path.join(os.path.sep))
-
-target = 'PycharmProjects'
-print(f'Ищем директорию с именем "{target}"\n')
+from collections.abc import Iterable
 
 
-def gen_files_path():
+def gen_files_path(my_path: str, target: str) -> Iterable[str]:
+    print(f'\nСписок файлов в директории "{target}":\n')
     for root, dirs, files in os.walk(my_path):
-        print(root)
-        for name in dirs:
-            if name == target:
-                return print(f'\nДиректория "{target}" найдена по адресу "{root}"')
+        for direct in dirs:
+            for file in files:
+                if target in root:
+                    yield f'{root}\\{direct}\\{file}'
 
 
-gen_files_path()
+root_path = os.path.abspath(os.path.join(os.path.sep))
+dir_name = 'Python_Basic\Module'
+
+for element in gen_files_path(root_path, dir_name):
+    print(element)
