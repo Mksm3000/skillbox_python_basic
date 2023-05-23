@@ -14,7 +14,7 @@ def counter(func: Callable) -> Callable:
             counter_dict[func.__name__] = 1
         else:
             counter_dict[func.__name__] += 1
-        return print(f'Имя функции: "{func.__name__}".\nВызывалась {counter_dict[func.__name__]} раз(а).')
+        print(f'Имя функции: "{func.__name__}".\nВызывалась {counter_dict[func.__name__]} раз(а).')
 
     return count_wrapper
 
@@ -57,7 +57,7 @@ def how_are_you(func: Any) -> Any:
 
 @counter
 @how_are_you
-def test() -> NoReturn:
+def test() -> None:
     """ Тестовая функция """
     print('<Тут что-то происходит...>')
 

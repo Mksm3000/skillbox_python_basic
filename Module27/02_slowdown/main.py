@@ -1,32 +1,27 @@
-
 import time
-from typing import Callable
+from typing import Callable, Any
 import functools
+import requests
 
 
 def timer(func: Callable) -> Callable:
     """ Декоратор подсчёта времени выполнения функции """
+
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        start = time.time()
+        pausa = 2
+        time.sleep(pausa)
+        print(f'\n<<<Пауза {pausa} сек>>>\n')
         func(*args, **kwargs)
-        end = time.time()
-        time_func = end - start
-        return print(round(time_func,5))
     return wrapper
 
 
 @timer
-def counter(num: int) -> list:
-    """ Функция создает список из num элементов
-:return список
-    """
-    return [x ** 2 ** x for x in range(num)]
+def checker(source: str) -> None:
+    rez = requests.get(source)
+    print(f'{source}\n{rez}')
 
 
-for element in range(18,24):
-    print(f'Для элемента №{element} время выполнения:', end=' ')
-    counter(element)
-    time.sleep(1)
-
-print(f'\nОписание функции {counter.__name__}:\n{counter.__doc__}')
+links = ['https://api.github.com', 'https://google.com', 'https://ya.ru', 'https://bing.com']
+for element in links:
+    checker(element)

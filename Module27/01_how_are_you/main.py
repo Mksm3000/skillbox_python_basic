@@ -15,7 +15,7 @@ def how_are_you(func: Any) -> Any:
 
 
 @how_are_you
-def test() -> NoReturn:
+def test() -> None:
     """ Тестовая функция """
     print('<Тут что-то происходит...>')
 
