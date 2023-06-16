@@ -1,7 +1,13 @@
+import functools
+
 
 def singleton(cls):
-    def wrapper():
-        pass
+    @functools.wraps(cls)
+    def wrapper(*args, **kwargs):
+        if not wrapper.instance:
+            wrapper.instance = cls(*args, **kwargs)
+        return wrapper.instance
+    wrapper.instance = None
     return wrapper
 
 
@@ -12,6 +18,9 @@ class Example:
 
 my_obj = Example()
 my_another_obj = Example()
+
+print(my_obj)
+print(my_another_obj)
 
 print(id(my_obj))
 print(id(my_another_obj))

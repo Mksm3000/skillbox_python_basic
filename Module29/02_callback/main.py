@@ -8,9 +8,7 @@ def callback(adress: str) -> Callable:
 
     def wrapped(func: Callable) -> Callable:
         app[adress] = func
-        def wrapper(*args, **kwargs):
-            return func(*args, **kwargs)
-        return wrapper
+        return func
     return wrapped
 
 
