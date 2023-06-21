@@ -1,5 +1,8 @@
+from collections import Counter
+
+
 def can_be_poly(text: str) -> bool:
-    return text[::] == text[::-1]
+    return len(list(filter(lambda value: value % 2, Counter(text).values()))) < 2
 
 
 print(can_be_poly('abcba'))
